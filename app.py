@@ -12,12 +12,21 @@ st.set_page_config(page_title="AI 姿势角度分析", layout="wide")
 
 st.title("基于YOLO的足部X光平片角度预测")
 st.markdown("上传 X 光平片，系统将自动旋转识别并计算医学角度。")
+# 诊断代码：在网页上显示服务器目录结构
+import os
+st.write("当前工作目录:", os.getcwd())
+base_path = os.path.dirname(os.path.abspath(__file__))
+models_path = os.path.join(base_path, "models")
 
+if os.path.exists(models_path):
+    st.write("models 文件夹内的文件:", os.listdir(models_path))
+else:
+    st.write("❌ 找不到 models 文件夹")
 # --- 侧边栏 ---
 with st.sidebar:
     st.header("设置")
     mode = st.radio("选择检测模式", ["正位 (POS)", "侧位 (SIDE)"])
-
+    
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     MODELS_DIR = os.path.join(BASE_DIR, "models")
